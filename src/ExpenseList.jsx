@@ -28,6 +28,15 @@ function ExpenseList() {
         setDateInput("");
         setAmountInput("");
     }
+
+
+    const renderExpensesTable = (expense, index) => {
+        <tr key={index}>
+            <td>{expense.name}</td>
+            <td>{expense.date}</td>
+            <td>{expense.amount}</td>
+        </tr>
+    }
     return (
         <div>
             <label>Expense</label><input type="text" value={input} onChange={handleChange}/><br></br>
@@ -35,22 +44,30 @@ function ExpenseList() {
             <label>Amount</label><input type="text" value={amountInput} onChange={amountHandleChange}/><br/>
             <button onClick={addExpense}>Add Expense</button>
             <table>
-                <tr>
-                    <th>Name</th>
-                    <th>DAte</th>
-                    <th>Amount</th>
-                </tr>
-                <tr>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                 <tbody>
                 {expenses.map(expense => (
-                    <td>{expense}</td>
+                    
+                        <li>{expense}</li>
+                    
                 ))}
                 {dates.map(date => (
-                    <td>{date}</td>
+                   
+                        <li>{date}</li>
+                    
                 ))}
                 {amounts.map(amount => (
-                    <td>{amount}</td>
+                    
+                        <li>{amount}</li>
+                   
                 ))}
-                </tr>
+                </tbody>
                
             </table>
             
