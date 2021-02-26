@@ -2,29 +2,59 @@ import React, {useState} from 'react'
 
 function ExpenseList() {
 
-    const [expenses, setExpenses] = useState(['Valami amerika']);
     const [input, setInput] = useState('');
+    const [expenses, setExpenses] = useState([]);
+    const [amountInput, setAmountInput] = useState('');
+    const [amounts, setAmounts] = useState([]);
+    const [dateInput, setDateInput] = useState('');
+    const [dates, setDates] = useState([]);
 
     const handleChange = (e)=> {
         setInput(e.target.value)
-        console.log('working')
+        
     }
-    const addExpense = (event)=>{
-        setExpenses([...expenses, input])
-        console.log('working')
+    const amountHandleChange = (e)=> {
+        setAmountInput(e.target.value)
+        
+    }
+    const dateHandleChange = (e)=> {
+        setDateInput(e.target.value)
+    }
+    const addExpense = (e)=>{
+        setExpenses([...expenses, input]);
+        setAmounts([...amounts, amountInput]);
+        setDates([...dates, dateInput]);
+        setInput("");
+        setDateInput("");
+        setAmountInput("");
     }
     return (
         <div>
-            <input type="text" value={input} onChange={handleChange}/>
+            <label>Expense</label><input type="text" value={input} onChange={handleChange}/><br></br>
+            <input type="date" value={dateInput} onChange={dateHandleChange}/><br/>
+            <label>Amount</label><input type="text" value={amountInput} onChange={amountHandleChange}/><br/>
             <button onClick={addExpense}>Add Expense</button>
-            <ul>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>DAte</th>
+                    <th>Amount</th>
+                </tr>
+                <tr>
                 {expenses.map(expense => (
-                    <li>{expense}</li>
+                    <td>{expense}</td>
                 ))}
-                <li>
-                    
-                </li>
-            </ul>
+                {dates.map(date => (
+                    <td>{date}</td>
+                ))}
+                {amounts.map(amount => (
+                    <td>{amount}</td>
+                ))}
+                </tr>
+               
+            </table>
+            
+            
         </div>
     )
 }
