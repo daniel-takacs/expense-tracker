@@ -1,13 +1,13 @@
 import './App.css';
+import ExpenseList from './ExpenseList';
 import Input from './Input';
-import Table from './Table';
 
 function App() {
   return (
     <div className="App">
     <h1>Expense Tracker</h1>
     <Input />
-    <Table />
+    <ExpenseList />
     </div>
   );
 }
