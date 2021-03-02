@@ -1,14 +1,14 @@
 import React, {useState} from 'react';
 import './App.css'
 
-const initialVales = {
+const initialValues = {
     text: "",
     amount: 0
 }
 
 function Input() {
 
-    const [values, setValues] = useState(initialVales);
+    const [values, setValues] = useState(initialValues);
 
 
     const handleChange = (e)=> {
@@ -24,7 +24,7 @@ function Input() {
     }
     return (
         <div className="flex">
-            <form>
+            <form onSubmit={addExpense}>
                 <label htmlFor="">Name
                     <input  type="text" 
                             name="text"
@@ -40,8 +40,12 @@ function Input() {
                             value={values.amount} 
                             onChange={handleChange}/>
                 </label>
-                <button type="submit" onClick={addExpense}> Add Expenses </button>
+                <button type="submit"> Add Expenses </button>
             </form>
+                <ul>
+                    <li>{values.text}</li>
+                    <span>{values.amount}</span>
+                </ul>
             
         </div>
     )
