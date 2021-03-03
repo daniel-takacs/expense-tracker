@@ -1,41 +1,50 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
 
-function Form({ expenses, setInput, input, setAmountInput, setDateInput, setExpenses, setAmounts,
-dates, amounts,  setDates, dateInput,amountInput}) {
+const initialValues = {
+    text: "",
+    amount: 0
+}
+function Form() {
 
  
+    const [values, setValues] = useState(initialValues);
+
 
     const handleChange = (e)=> {
-        setInput(e.target.value)
-        
+        const { name, value } = e.target;
+        setValues({
+            ...values, 
+            id: Math.random(),
+            [name]: value,
+        });
     }
-    const amountHandleChange = (e)=> {
-        setAmountInput(e.target.value)
-        
+    const addExpense = (e)=> {
+        e.preventDefault()
+        console.log(values)
     }
-    const dateHandleChange = (e)=> {
-        setDateInput(e.target.value)
-    }
-    const addExpense = (e)=>{
-        setExpenses([...expenses, input]);
-        setAmounts([...amounts, amountInput]);
-        setDates([...dates, dateInput]);
-        setInput("");
-        setDateInput("");
-        setAmountInput("");
-    }
+    const items = Object.entries(values);
 
 
- 
     return (
-        <div>
-            <label>Expense</label><input type="text" value={input} onChange={handleChange}/><br></br>
-            <input type="date" value={dateInput} onChange={dateHandleChange}/><br/>
-            <label>Amount</label><input type="text" value={amountInput} onChange={amountHandleChange}/><br/>
-            <button onClick={addExpense}>Add Expense</button>
-            
-
-            
+        <div className="flex">
+            <form onSubmit={addExpense}>
+                <label htmlFor="">Name
+                    <input  type="text" 
+                            name="text"
+                            value={values.text} 
+                            onChange={handleChange}/>
+                </label>
+                <label>Date
+                    <input type="date"/>
+                </label>
+                <label htmlFor="">Amount
+                    <input  type="text" 
+                            name="amount"
+                            value={values.amount} 
+                            onChange={handleChange}/>
+                </label>
+                <button type="submit"> Add Expenses </button>
+            </form>
         </div>
     )
 }
