@@ -1,37 +1,29 @@
 import React, {useState} from 'react';
 
-const initialValues = {
-    text: "",
-    amount: 0
-}
 function Form() {
 
- 
-    const [values, setValues] = useState(initialValues);
-
-
+    const [input, setInput] = useState("");
+    const [expenses, setExpenses] = useState([]);
+    
     const handleChange = (e)=> {
-        const { name, value } = e.target;
-        setValues({
-            ...values, 
-            id: Math.random(),
-            [name]: value,
-        });
+        setInput(e.target.value)
     }
     const addExpense = (e)=> {
         e.preventDefault()
-        console.log(values)
+        setExpenses([...expenses, {key: Math.random(), text: input}])
+        setInput("")
+        console.log(expenses)
     }
-    const items = Object.entries(values);
-
-
+    const a = expenses.map(expense =>(
+        <li>{expense.text}</li>
+    ))
     return (
         <div className="flex">
-            <form onSubmit={addExpense}>
+            <form>
                 <label htmlFor="">Name
                     <input  type="text" 
                             name="text"
-                            value={values.text} 
+                            value={input} 
                             onChange={handleChange}/>
                 </label>
                 <label>Date
@@ -40,11 +32,14 @@ function Form() {
                 <label htmlFor="">Amount
                     <input  type="text" 
                             name="amount"
-                            value={values.amount} 
-                            onChange={handleChange}/>
+                            
+                            />
                 </label>
-                <button type="submit"> Add Expenses </button>
+                <button onClick={addExpense}type="submit"> Add Expenses </button>
             </form>
+           <ul>
+               {a}
+           </ul>
         </div>
     )
 }
