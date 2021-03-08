@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-
+import './App.css'
 
 function Form({expenses, setExpenses}) {
 
@@ -17,8 +17,8 @@ function Form({expenses, setExpenses}) {
         
     }
     return (
-        <div>
-            <form action="" onSubmit={AddExpense}>
+        <div className="form">
+            <form onSubmit={AddExpense}>
                 <input type="text" ref={textInput} placeholder="expense"/>
                 <input type="date" ref={date}/>
                 <input type="text" ref={amount} placeholder="amount"/>

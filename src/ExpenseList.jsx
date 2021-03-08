@@ -1,13 +1,16 @@
 import React from 'react';
 import ExpenseItem from './ExpenseItem'
 
+
 function ExpenseList({expenses, setExpenses}) {
     
     return (
-        <div>
-        {expenses.map((value, index) => (
-            <ExpenseItem key={index} expenses={value} index={index} />
-        ))}
+        <div className="expense-list">
+            <ul>
+                {expenses.map((value, index) => (
+                    <ExpenseItem key={index} expenses={value} index={index} />
+                ))}
+            </ul>
         </div>
     )
     }
