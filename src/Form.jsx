@@ -1,50 +1,30 @@
-import React, {useState} from 'react';
-
-const initialValues = {
-    text: "",
-    amount: 0
-}
-function Form() {
-
- 
-    const [values, setValues] = useState(initialValues);
+import React, {useRef} from 'react';
 
 
-    const handleChange = (e)=> {
-        const { name, value } = e.target;
-        setValues({
-            ...values, 
-            id: Math.random(),
-            [name]: value,
-        });
+function Form({expenses, setExpenses}) {
+
+    const textInput = useRef("")
+    const date = useRef(null)
+    const amount = useRef(null)
+
+    const AddExpense = (e)=> {
+        e.preventDefault();
+        setExpenses([...expenses, {
+            textInput: textInput.current.value, 
+            date: date.current.value,
+            amount: amount.current.value
+        }])
+        
     }
-    const addExpense = (e)=> {
-        e.preventDefault()
-        console.log(values)
-    }
-    const items = Object.entries(values);
-
-
     return (
-        <div className="flex">
-            <form onSubmit={addExpense}>
-                <label htmlFor="">Name
-                    <input  type="text" 
-                            name="text"
-                            value={values.text} 
-                            onChange={handleChange}/>
-                </label>
-                <label>Date
-                    <input type="date"/>
-                </label>
-                <label htmlFor="">Amount
-                    <input  type="text" 
-                            name="amount"
-                            value={values.amount} 
-                            onChange={handleChange}/>
-                </label>
-                <button type="submit"> Add Expenses </button>
+        <div>
+            <form action="" onSubmit={AddExpense}>
+                <input type="text" ref={textInput} placeholder="expense"/>
+                <input type="date" ref={date}/>
+                <input type="text" ref={amount} placeholder="amount"/>
+                <button>Add Expense</button>
             </form>
+           
         </div>
     )
 }
