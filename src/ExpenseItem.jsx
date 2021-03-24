@@ -10,9 +10,10 @@ function ExpenseItem({expenses, index, removeExpenses}) {
   
     return (
         <div className="expense-item">
+            
             <li>{expenses.textInput}</li>
             <li>{expenses.date}</li>
-            <li>{expenses.amount}</li>
+            <li>{expenses.amount}€</li>
             <button onClick={clickHandle}>x</button>
         </div>
     )
